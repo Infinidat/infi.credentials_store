@@ -7,10 +7,12 @@ Usage
 -----
 
 First, define a subclass. Subclasses need to define:
+
 * `_get_file_folder` which is a name of a folder that will be created in the user's profile directory where the credentials will be stored.
 * `authenticate`, which will be called to verify the credentials are valid (if they are not, the user will be prompted to reenter the credentials)
 * `ask_credentials_prompt`, which prints a prompt before asking for the credentials.
 
+For example:
 
     class MyCLICrdentialsStore(CLICredentialsStore):
         def _get_file_folder(self):
