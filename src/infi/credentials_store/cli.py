@@ -1,4 +1,5 @@
-from base import FileCredentialsStore, Credentials
+from __future__ import print_function
+from .base import FileCredentialsStore, Credentials
 
 
 class CLICredentialsStore(FileCredentialsStore):
@@ -34,7 +35,7 @@ class CLICredentialsStore(FileCredentialsStore):
         return credentials
 
     def ask_credentials_prompt(self, key):
-        print '\nConnecting to ' + str(key)
+        print('\nConnecting to ' + str(key))
 
     def ask_credentials(self, key):
         self.ask_credentials_prompt(key)
@@ -47,7 +48,7 @@ class CLICredentialsStore(FileCredentialsStore):
                 if self.ask_to_save_credentials():
                     self.set_credentials(key, credentials)
                 return credentials
-            print 'Invalid username or password'
+            print('Invalid username or password')
 
     def set_credentials(self, key, credentials):
         self.temp_credentials[str(key)] = credentials
