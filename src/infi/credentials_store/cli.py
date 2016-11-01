@@ -15,7 +15,7 @@ class CLICredentialsStore(FileCredentialsStore):
     def ask_for_username(self):
         username = None
         while not username:
-            username = raw_input('Username: ').strip()
+            username = input('Username: ').strip()
         return username
 
     def ask_for_password(self):
@@ -26,7 +26,7 @@ class CLICredentialsStore(FileCredentialsStore):
         return password
 
     def ask_to_save_credentials(self):
-        return raw_input('Remember username and password [y/N]? ').lower() in ('y', 'yes')
+        return input('Remember username and password [y/N]? ').lower() in ('y', 'yes')
 
     def get_credentials(self, key):
         credentials = self.get_existing_credentials(key)
