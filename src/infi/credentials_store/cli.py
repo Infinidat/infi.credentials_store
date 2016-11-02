@@ -1,5 +1,12 @@
+import sys
+
 from __future__ import print_function
 from .base import FileCredentialsStore, Credentials
+
+if sys.version_info > (3, 0):
+    _input = input
+else:
+    _input = raw_input
 
 
 class CLICredentialsStore(FileCredentialsStore):
@@ -15,7 +22,7 @@ class CLICredentialsStore(FileCredentialsStore):
     def ask_for_username(self):
         username = None
         while not username:
-            username = input('Username: ').strip()
+            username = _input('Username: ').strip()
         return username
 
     def ask_for_password(self):
@@ -26,7 +33,7 @@ class CLICredentialsStore(FileCredentialsStore):
         return password
 
     def ask_to_save_credentials(self):
-        return input('Remember username and password [y/N]? ').lower() in ('y', 'yes')
+        return _input('Remember username and password [y/N]? ').lower() in ('y', 'yes')
 
     def get_credentials(self, key):
         credentials = self.get_existing_credentials(key)
