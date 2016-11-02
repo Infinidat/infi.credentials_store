@@ -1,6 +1,6 @@
-import sys
-
 from __future__ import print_function
+
+import sys
 from .base import FileCredentialsStore, Credentials
 
 if sys.version_info > (3, 0):
