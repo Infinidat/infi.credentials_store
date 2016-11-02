@@ -1,4 +1,12 @@
-from base import FileCredentialsStore, Credentials
+from __future__ import print_function
+
+import sys
+from .base import FileCredentialsStore, Credentials
+
+if sys.version_info > (3, 0):
+    _input = input
+else:
+    _input = raw_input
 
 
 class CLICredentialsStore(FileCredentialsStore):
@@ -14,7 +22,7 @@ class CLICredentialsStore(FileCredentialsStore):
     def ask_for_username(self):
         username = None
         while not username:
-            username = raw_input('Username: ').strip()
+            username = _input('Username: ').strip()
         return username
 
     def ask_for_password(self):
@@ -25,7 +33,7 @@ class CLICredentialsStore(FileCredentialsStore):
         return password
 
     def ask_to_save_credentials(self):
-        return raw_input('Remember username and password [y/N]? ').lower() in ('y', 'yes')
+        return _input('Remember username and password [y/N]? ').lower() in ('y', 'yes')
 
     def get_credentials(self, key):
         credentials = self.get_existing_credentials(key)
@@ -34,7 +42,7 @@ class CLICredentialsStore(FileCredentialsStore):
         return credentials
 
     def ask_credentials_prompt(self, key):
-        print '\nConnecting to ' + str(key)
+        print('\nConnecting to ' + str(key))
 
     def ask_credentials(self, key):
         self.ask_credentials_prompt(key)
@@ -47,7 +55,7 @@ class CLICredentialsStore(FileCredentialsStore):
                 if self.ask_to_save_credentials():
                     self.set_credentials(key, credentials)
                 return credentials
-            print 'Invalid username or password'
+            print('Invalid username or password')
 
     def set_credentials(self, key, credentials):
         self.temp_credentials[str(key)] = credentials
