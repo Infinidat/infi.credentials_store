@@ -169,7 +169,6 @@ class FileCredentialsStore(BaseCredentialsStore):
         return None
 
     def set_credentials(self, key, credentials):
-        super(FileCredentialsStore, self).set_credentials(key, credentials)
         self._ensure_file_exists(self.get_file_path())
         data = self._load_file()
         data[str(key)] = credentials.to_dict()
