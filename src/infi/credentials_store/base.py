@@ -21,7 +21,7 @@ class Credentials(object):
 
     def __init__(self, username, password):
         self._username = username
-        self._password = HiddenString(password)
+        self._password = password and HiddenString(password)
 
     def get_username(self):
         return self._username
