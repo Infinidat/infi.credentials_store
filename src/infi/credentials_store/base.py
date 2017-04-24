@@ -8,6 +8,12 @@ class NoCredentialsException(Exception):
     pass
 
 
+class HiddenString(str):
+    def __repr__(self):
+        # replacing the "repr" will hide the password from interactive prompts, tracebacks, etc.
+        return "*" * 8
+
+
 class Credentials(object):
     """
     An object for storing a username + password pair.
@@ -15,7 +21,7 @@ class Credentials(object):
 
     def __init__(self, username, password):
         self._username = username
-        self._password = password
+        self._password = password and HiddenString(password)
 
     def get_username(self):
         return self._username
