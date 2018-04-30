@@ -172,6 +172,7 @@ class FileCredentialsStore(BaseCredentialsStore):
             credentials = self._load_credentials(option)
             if self.authenticate(key, credentials):
                 return credentials
+        print 'Failed to authenticate, please re enter credentials'
         return None
 
     def set_credentials(self, key, credentials):
