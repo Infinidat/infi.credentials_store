@@ -1,6 +1,7 @@
 from __future__ import print_function
 
 import sys
+import os
 from .base import FileCredentialsStore, Credentials
 
 if sys.version_info > (3, 0):
@@ -38,7 +39,11 @@ class CLICredentialsStore(FileCredentialsStore):
     def get_credentials(self, key):
         credentials = self.get_existing_credentials(key)
         if not credentials:
-            print('Failed to authenticate, please re enter credentials')
+            if os.path.exists(self._build_file_path()):
+                error_message = 'Failed to authenticate, please re enter credentials'
+            else:
+                error_message = 'No credentials found, please enter credentials'
+            print(error_message)
             credentials = self.ask_credentials(key)
         return credentials
 
