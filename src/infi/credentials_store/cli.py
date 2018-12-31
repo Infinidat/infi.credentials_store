@@ -40,10 +40,7 @@ class CLICredentialsStore(FileCredentialsStore):
         credentials = self.get_existing_credentials(key)
         if not credentials:
             if os.path.exists(self._build_file_path()):
-                error_message = 'Failed to authenticate, please re enter credentials'
-            else:
-                error_message = 'No credentials found, please enter credentials'
-            print(error_message)
+                print('Failed to authenticate, please re enter credentials')
             credentials = self.ask_credentials(key)
         return credentials
 
