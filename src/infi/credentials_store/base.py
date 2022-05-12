@@ -29,6 +29,11 @@ class Credentials(object):
     def get_password(self):
         return self._password
 
+    def validate(self):
+        password = self.get_password()
+        if not password.isascii():
+            raise ValueError('Password contains forbidden characters')
+
     @classmethod
     def from_dict(cls, data):
         return cls(data['username'], data['password'] if data.get('clear_text', True) else unmask(data['password']))
