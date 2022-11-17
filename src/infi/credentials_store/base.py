@@ -175,9 +175,7 @@ class FileCredentialsStore(BaseCredentialsStore):
         # Look for existing credentials, either for the given system or global
         for option in (str(key), DEFAULT):
             credentials = self._load_credentials(option)
-            if self.authenticate(key, credentials):
-                return credentials
-        return None
+            return credentials
 
     def set_credentials(self, key, credentials):
         self._ensure_file_exists(self.get_file_path())
