@@ -32,7 +32,7 @@ class Credentials(object):
     def validate(self):
         password = self.get_password()
         if not password.isascii():
-            raise ValueError('Password contains forbidden characters')
+            raise ValueError('Wrong password. Password can contain only ASCII characters.')
 
     @classmethod
     def from_dict(cls, data):
